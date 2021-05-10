@@ -4,6 +4,7 @@ import com.github.mithwick93.tutorial.gateway.dto.Quote;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,6 +14,9 @@ public class QuotersGateway {
 
     private RestTemplate restTemplate;
 
+    @Value("${quoters.url:default_url}")
+    private String QUOTERS_URL;
+
     @Autowired
     public void setRestTemplate(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -21,7 +25,7 @@ public class QuotersGateway {
     public Quote getSpringBootQuote() {
         try {
             Quote quote = restTemplate.getForObject(
-                    "https://quoters.apps.pcfone.io/api/random",
+                    QUOTERS_URL.concat("/random"),
                     Quote.class
             );
 
