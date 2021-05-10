@@ -24,24 +24,19 @@ public class QuotersGateway {
     }
 
     public Quote getSpringBootQuote() {
-        try {
-//            Quote quote = restTemplate.getForObject(
-//                    QUOTERS_URL.concat("/random"),
-//                    Quote.class
-//            );
+//        Quote quote = restTemplate.getForObject(
+//                QUOTERS_URL.concat("/random"),
+//                Quote.class
+//        );
 
-            ResponseEntity<Quote> quoteResponseEntity = restTemplate.getForEntity(
-                    QUOTERS_URL.concat("/random"),
-                    Quote.class
-            );
+        ResponseEntity<Quote> quoteResponseEntity = restTemplate.getForEntity(
+                QUOTERS_URL.concat("/random"),
+                Quote.class
+        );
 
-            LOG.info("Got the quote response: " + quoteResponseEntity);
-            Quote quote = quoteResponseEntity.getBody();
-            LOG.info("Got the quote: " + quoteResponseEntity.getBody());
-            return quote;
-        } catch (Exception ex) {
-            LOG.error("Exception while getting quote", ex);
-            return null;
-        }
+        LOG.info("Got the quote response: " + quoteResponseEntity);
+        Quote quote = quoteResponseEntity.getBody();
+        LOG.info("Got the quote: " + quoteResponseEntity.getBody());
+        return quote;
     }
 }
