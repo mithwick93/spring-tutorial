@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Quote {
+public class QuoteTo {
     private String type;
-    private Value value;
+    private ValueTo value;
 }

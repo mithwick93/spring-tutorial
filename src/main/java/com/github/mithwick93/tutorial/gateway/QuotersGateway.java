@@ -1,6 +1,8 @@
 package com.github.mithwick93.tutorial.gateway;
 
-import com.github.mithwick93.tutorial.gateway.dto.Quote;
+import com.github.mithwick93.tutorial.gateway.dto.QuoteTo;
+import com.github.mithwick93.tutorial.gateway.mapper.QuoteMapper;
+import com.github.mithwick93.tutorial.model.Quote;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Objects;
 
 @Component
 public class QuotersGateway {
@@ -29,14 +33,14 @@ public class QuotersGateway {
 //                Quote.class
 //        );
 
-        ResponseEntity<Quote> quoteResponseEntity = restTemplate.getForEntity(
+        ResponseEntity<QuoteTo> quoteResponseEntity = restTemplate.getForEntity(
                 QUOTERS_URL.concat("/random"),
-                Quote.class
+                QuoteTo.class
         );
 
         LOG.info("Got the quote response: " + quoteResponseEntity);
-        Quote quote = quoteResponseEntity.getBody();
-        LOG.info("Got the quote: " + quoteResponseEntity.getBody());
-        return quote;
+        QuoteTo quoteTo = quoteResponseEntity.getBody();
+        LOG.info("Got the quoteTo: " + quoteResponseEntity.getBody());
+        return QuoteMapper.fromTo(Objects.requireNonNull(quoteTo));
     }
 }

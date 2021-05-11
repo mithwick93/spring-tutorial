@@ -1,6 +1,6 @@
 package com.github.mithwick93.tutorial.controller;
 
-import com.github.mithwick93.tutorial.gateway.dto.Quote;
+import com.github.mithwick93.tutorial.model.Quote;
 import com.github.mithwick93.tutorial.service.ConsumingRestAppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
