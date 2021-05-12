@@ -1,6 +1,6 @@
 package com.github.mithwick93.tutorial.dal.dao;
 
-import com.github.mithwick93.tutorial.dal.dao.dto.CustomerTo;
+import com.github.mithwick93.tutorial.dal.dao.dto.CustomerDTO;
 import com.github.mithwick93.tutorial.dal.dao.mapper.CustomerMapper;
 import com.github.mithwick93.tutorial.model.Customer;
 import lombok.NonNull;
@@ -33,16 +33,16 @@ public class CustomerDao {
         mapSqlParameterSource.addValue("NAME", name);
 //        String GET_CUSTOMER_BY_NAME_QUERY = "SELECT id, first_name, last_name FROM customers WHERE first_name = :NAME";
 
-        CustomerTo customerToQuery = new CustomerTo();
-        customerToQuery.setFirstName(name);
-        SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(customerToQuery);
+        CustomerDTO customerDTOQuery = new CustomerDTO();
+        customerDTOQuery.setFirstName(name);
+        SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(customerDTOQuery);
         String GET_CUSTOMER_BY_NAME_QUERY = "SELECT id, first_name, last_name FROM customers WHERE first_name = :firstName";
 
-        List<CustomerTo> customerTos = namedParameterJdbcTemplate.query(
+        List<CustomerDTO> customerDTOS = namedParameterJdbcTemplate.query(
                 GET_CUSTOMER_BY_NAME_QUERY,
                 namedParameters,
                 new CustomerMapper.CustomerRowMapper());
 
-        return CustomerMapper.fromTo(customerTos);
+        return CustomerMapper.fromTo(customerDTOS);
     }
 }

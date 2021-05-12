@@ -1,6 +1,6 @@
 package com.github.mithwick93.tutorial.dal.dao.mapper;
 
-import com.github.mithwick93.tutorial.dal.dao.dto.CustomerTo;
+import com.github.mithwick93.tutorial.dal.dao.dto.CustomerDTO;
 import com.github.mithwick93.tutorial.model.Customer;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -15,26 +15,26 @@ import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CustomerMapper {
-    public static List<Customer> fromTo(@NonNull List<CustomerTo> customerTos) {
+    public static List<Customer> fromTo(@NonNull List<CustomerDTO> customerDTOS) {
         List<Customer> customers = new ArrayList<>();
 
-        for (CustomerTo customerTo : customerTos) {
+        for (CustomerDTO customerDTO : customerDTOS) {
             Customer customer = new Customer();
-            BeanUtils.copyProperties(customerTo, customer);
+            BeanUtils.copyProperties(customerDTO, customer);
 
             customers.add(customer);
         }
         return customers;
     }
 
-    public static class CustomerRowMapper implements RowMapper<CustomerTo> {
+    public static class CustomerRowMapper implements RowMapper<CustomerDTO> {
         @Override
-        public CustomerTo mapRow(ResultSet rs, int rowNum) throws SQLException {
-            CustomerTo customerTo = new CustomerTo();
-            customerTo.setId(rs.getLong("id"));
-            customerTo.setFirstName(rs.getString("first_name"));
-            customerTo.setLastName(rs.getString("last_name"));
-            return customerTo;
+        public CustomerDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+            CustomerDTO customerDTO = new CustomerDTO();
+            customerDTO.setId(rs.getLong("id"));
+            customerDTO.setFirstName(rs.getString("first_name"));
+            customerDTO.setLastName(rs.getString("last_name"));
+            return customerDTO;
         }
     }
 }

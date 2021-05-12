@@ -1,6 +1,6 @@
 package com.github.mithwick93.tutorial.gateway;
 
-import com.github.mithwick93.tutorial.gateway.dto.QuoteTo;
+import com.github.mithwick93.tutorial.gateway.dto.QuoteDTO;
 import com.github.mithwick93.tutorial.gateway.mapper.QuoteMapper;
 import com.github.mithwick93.tutorial.model.Quote;
 import org.slf4j.Logger;
@@ -33,14 +33,14 @@ public class QuotersGateway {
 //                Quote.class
 //        );
 
-        ResponseEntity<QuoteTo> quoteResponseEntity = restTemplate.getForEntity(
+        ResponseEntity<QuoteDTO> quoteResponseEntity = restTemplate.getForEntity(
                 QUOTERS_URL.concat("/random"),
-                QuoteTo.class
+                QuoteDTO.class
         );
 
         LOG.info("Got the quote response: " + quoteResponseEntity);
-        QuoteTo quoteTo = quoteResponseEntity.getBody();
+        QuoteDTO quoteDTO = quoteResponseEntity.getBody();
         LOG.info("Got the quoteTo: " + quoteResponseEntity.getBody());
-        return QuoteMapper.fromTo(Objects.requireNonNull(quoteTo));
+        return QuoteMapper.fromTo(Objects.requireNonNull(quoteDTO));
     }
 }
