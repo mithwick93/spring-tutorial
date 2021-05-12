@@ -19,12 +19,19 @@ public class QuotersGateway {
 
     private RestTemplate restTemplate;
 
+    private QuoteMapper quoteMapper;
+
     @Value("${quoters.url:default_url}")
     private String QUOTERS_URL;
 
     @Autowired
     public void setRestTemplate(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
+    }
+
+    @Autowired
+    public void setQuoteMapper(QuoteMapper quoteMapper) {
+        this.quoteMapper = quoteMapper;
     }
 
     public Quote getSpringBootQuote() {
@@ -41,6 +48,6 @@ public class QuotersGateway {
         LOG.info("Got the quote response: " + quoteResponseEntity);
         QuoteDTO quoteDTO = quoteResponseEntity.getBody();
         LOG.info("Got the quoteTo: " + quoteResponseEntity.getBody());
-        return QuoteMapper.fromTo(Objects.requireNonNull(quoteDTO));
+        return quoteMapper.fromQuoteDTOtoQuote(Objects.requireNonNull(quoteDTO));
     }
 }

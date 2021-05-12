@@ -1,7 +1,7 @@
 package com.github.mithwick93.tutorial.dal.dao;
 
 import com.github.mithwick93.tutorial.dal.dao.dto.CustomerDTO;
-import com.github.mithwick93.tutorial.dal.dao.mapper.CustomerMapper;
+import com.github.mithwick93.tutorial.dal.dao.mapper.DtoMapper;
 import com.github.mithwick93.tutorial.model.Customer;
 import lombok.NonNull;
 import org.slf4j.Logger;
@@ -19,11 +19,18 @@ import java.util.List;
 public class CustomerDao {
     private static final Logger LOG = LoggerFactory.getLogger(CustomerDao.class);
 
-    NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    private DtoMapper.CustomerMapper customerMapper;
 
     @Autowired
     public void setJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    }
+
+    @Autowired
+    public void setCustomerMapper(DtoMapper.CustomerMapper customerMapper) {
+        this.customerMapper = customerMapper;
     }
 
     public List<Customer> getCustomerByName(@NonNull String name) {
@@ -41,8 +48,8 @@ public class CustomerDao {
         List<CustomerDTO> customerDTOS = namedParameterJdbcTemplate.query(
                 GET_CUSTOMER_BY_NAME_QUERY,
                 namedParameters,
-                new CustomerMapper.CustomerRowMapper());
+                new DtoMapper.CustomerRowMapper());
 
-        return CustomerMapper.fromTo(customerDTOS);
+        return customerMapper.fromCustomerDTOStoCustomers(customerDTOS);
     }
 }

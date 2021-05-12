@@ -31,6 +31,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation "io.springfox:springfox-boot-starter:3.0.0"
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 //	implementation 'org.flywaydb:flyway-core'
 //	implementation 'org.springframework.kafka:spring-kafka'
     compileOnly 'org.projectlombok:lombok'
@@ -39,6 +40,7 @@ dependencies {
 //	runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 //	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
 //	testImplementation 'org.springframework.kafka:spring-kafka-test'
