@@ -16,8 +16,6 @@ public class DtoMapper {
     @Mapper(componentModel = "spring")
     public interface CustomerMapper {
         List<Customer> fromCustomerDTOStoCustomers(List<CustomerDTO> customerDTOS);
-
-        Customer fromCustomerDTOtoCustomer(CustomerDTO customerDTOS);
     }
 
     public static class CustomerRowMapper implements RowMapper<CustomerDTO> {
